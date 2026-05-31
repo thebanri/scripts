@@ -1,1 +1,1 @@
-echo 'Hello from script A'
+echo 'Updated script A'
