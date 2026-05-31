@@ -1,5 +1,8 @@
-function gitadd --description 'Iteratively add and commit changed files using oco'
-    for file in (git diff --name-only)
-        git add $file && oco --yes
+function gitadd --description 'Add all changes, commit with oco and push'
+    git add .
+    if oco --yes
+        git push
+    else
+        echo "oco failed or no changes to commit."
     end
 end
