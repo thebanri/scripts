@@ -14,5 +14,3 @@ set WINDOWS_ID (sudo efibootmgr | string match -r "Boot([0-9A-F]{4}).*(Microsoft
     sudo efibootmgr --bootnext $WINDOWS_ID
     sudo systemctl reboot
 end
-
-win-next
