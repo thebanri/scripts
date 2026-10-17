@@ -25,6 +25,7 @@ set -p fish_function_path ~/scripts
 | `open [yol]` | Dosya/klasörü varsayılan uygulamayla açar, yol verilmezse bulunulan klasörü. Terminal kapansa da açık kalır |
 | `win-next` | Sadece bir sonraki açılış için Windows'u seçer ve yeniden başlatır (`efibootmgr --bootnext`, sudo ister) |
 | `shu`, `shutdown` | `systemctl poweroff` |
+| `zapret-add <site>...` | Siteyi [zapret](https://github.com/bol-van/zapret) listesine (`/opt/zapret/ipset/zapret-hosts-user.txt`) ekler, alt alan adları da kapsanır. Link de kabul eder (`https://www.x.com/yol` → `x.com`). Listeyi `~/Downloads/Config/Zapret/`'e de kopyalar, commit/push elle. sudo ister |
 | `kivo` | Kivo'yu `WEBKIT_DISABLE_DMABUF_RENDERER=1` ile açar (WebKitGTK'nın NVIDIA'daki boş/siyah pencere sorununa karşı) |
 
 ## find_turkish.py
