@@ -25,6 +25,8 @@ set -p fish_function_path ~/scripts
 | `open [yol]` | Dosya/klasörü varsayılan uygulamayla açar, yol verilmezse bulunulan klasörü. Terminal kapansa da açık kalır |
 | `win-next` | Sadece bir sonraki açılış için Windows'u seçer ve yeniden başlatır (`efibootmgr --bootnext`, sudo ister) |
 | `shu`, `shutdown` | `systemctl poweroff` |
+| `conv <format> <dosya>...` | ffmpeg ile dönüştürür, çıktı aynı adla yeni uzantıda: `conv mp3 *.mp4`, `conv gif klip.mkv`, `conv mp4 kayit.mkv`. mp3/m4a/opus/flac/wav'da görüntüyü atar, mp4/webm her yerde oynasın diye yuv420p kullanır, gif'i palet ile üretir |
+| `r-dlp <link> [yt-dlp seçenekleri]` | Reddit gönderisindeki videoyu bulup gönderi başlığıyla indirir. Reddit curl'ü engellediği için linki [vxreddit](https://vxreddit.com) üzerinden bulur, v.redd.it videolarını en iyi kalitede sesle birlikte alır. `reddit.com`, `old.reddit.com`, `redd.it` kısa linki ve doğrudan `v.redd.it` linki kabul eder (`v.redd.it`de dosya adı `reddit-<id>` olur) |
 | `zapret-add <site>...` | Siteyi [zapret](https://github.com/bol-van/zapret) listesine (`/opt/zapret/ipset/zapret-hosts-user.txt`) ekler, alt alan adları da kapsanır. Link de kabul eder (`https://www.x.com/yol` → `x.com`). Listeyi `~/Downloads/Config/Zapret/`'e de kopyalar, commit/push elle. sudo ister |
 | `kivo` | Kivo'yu `WEBKIT_DISABLE_DMABUF_RENDERER=1` ile açar (WebKitGTK'nın NVIDIA'daki boş/siyah pencere sorununa karşı) |
 
