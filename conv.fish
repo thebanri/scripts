@@ -39,9 +39,21 @@ function conv --description 'ffmpeg ile dönüştürür: conv <format> <dosya>..
         end
         set -l in_ext (path extension $f | string lower)
         if test $fmt = pdf
-            # ffmpeg pdf yazamıyor: resimler ImageMagick, belgeler (docx odt pptx xlsx txt...) LibreOffice ile
+            # ffmpeg pdf yazamıyor: resimler ImageMagick, belgeler (docx odt pptx xlsx txt...) OnlyOffice (yoksa LibreOffice) ile
+            set -l x2t /opt/onlyoffice/desktopeditors/converter/x2t
             if contains -- $in_ext .png .jpg .jpeg .webp .avif .bmp .tiff .gif
                 magick $f $out
+            else if test -x $x2t
+                # x2t parametreleri XML dosyasından okur; 513 = PDF
+                set -l fonts ~/.local/share/onlyoffice/desktopeditors/data/fonts
+                set -l tmp (mktemp -d)
+                set -l from (path resolve $f | string replace -a '&' '&amp;' | string replace -a '<' '&lt;')
+                set -l to (path resolve $out | string replace -a '&' '&amp;' | string replace -a '<' '&lt;')
+                printf '<?xml version="1.0" encoding="utf-8"?><TaskQueueDataConvert><m_sFileFrom>%s</m_sFileFrom><m_sFileTo>%s</m_sFileTo><m_nFormatTo>513</m_nFormatTo><m_sAllFontsPath>%s/AllFonts.js</m_sAllFontsPath><m_sFontDir>%s</m_sFontDir><m_sTempDir>%s</m_sTempDir></TaskQueueDataConvert>' $from $to $fonts $fonts $tmp >$tmp/p.xml
+                $x2t $tmp/p.xml >/dev/null
+                set -l st $status
+                rm -rf $tmp
+                test $st -eq 0
             else
                 soffice --headless --convert-to pdf --outdir (path dirname $f) $f
             end
